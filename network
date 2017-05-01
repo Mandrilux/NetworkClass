@@ -9,16 +9,10 @@ except:
 
 def usage():
     print ("USAGE")
-    print("\t./205IQ u 6 [IQ1][IQ2]")
-    print("")
-    print("DESCRIPTION")
-    print("\tu\tpredetermined mean")
-    print("\t6\tpredetermined standart deviation")
-    print("\tIQ1\tminimum IQ")
-    print("\tIQ2\tmaximum IQ")    
+    print("\tnetwork [network] [number of subnet] [subnet1] ...")
     sys.exit(84)
 
 
 if __name__ == '__main__':
-    if (len(sys.argv) != 2):
+    if (len(sys.argv) < 2):
         usage()
