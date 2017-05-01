@@ -9,10 +9,36 @@ except:
 
 def usage():
     print ("USAGE")
-    print("\tnetwork [network] [number of subnet] [subnet1] ...")
+    print("\tnetwork [network] [number of subnet] [nbIP subnet 1] ...")
     sys.exit(84)
 
+def getNbsubnet():
+    try:
+        tmp = int (sys.argv[2])
+    except ValueError:
+        print ("Error: invalid number of subnet", file=sys.stderr)
+        sys.exit(84)
+    return  tmp
+
+def getArgument(subnet):
+    for i in range (3, len(sys.argv)):
+        print (sys.argv[i])
+        
+def calcSubnet(subnet):
+    print ("------------------------------------------------")
+    print ("Subnet %s" %subnet)
+    print ("------------------------------------------------")
+
+def initNetwork(network):
+    print ("------------------------------------------------")
+    print ("             Network : %s                       " % network)
 
 if __name__ == '__main__':
-    if (len(sys.argv) < 2):
+    if (len(sys.argv) < 4):
         usage()
+    l = []
+    network = sys.argv[1]
+    nbSubnet = getNbsubnet()
+    getArgument(nbSubnet)
+    initNetwork(network)
+    #calcSubnet("toto")
