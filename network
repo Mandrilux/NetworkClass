@@ -32,9 +32,9 @@ def getArgument(subnet):
         print ("Error: invalid number of parametre", file=sys.stderr)
         exit (84)
         
-def calcSubnet(subnet):
+def calcSubnet(subnet, i):
     print ("------------------------------------------------")
-    print ("Subnet %s" %subnet)
+    print ("              Subnet#%d %s                      " %(i, subnet))
     print ("------------------------------------------------")
 
 def initNetwork(network):
@@ -50,4 +50,5 @@ if __name__ == '__main__':
     nbSubnet = getNbsubnet()
     getArgument(nbSubnet)
     initNetwork(network)
-    #calcSubnet("toto")
+    for i in range (0, len(l)):
+        calcSubnet(l[i], i+ 1)
