@@ -73,6 +73,7 @@ def initNetwork():
     print ("Class   : %s" % Ni[1])
     print ("CIDR    : %s" % Ni[3])
     print ("################################################")
+    print ("")
 
 if __name__ == '__main__':
     if (len(sys.argv) < 4):
