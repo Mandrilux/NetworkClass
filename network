@@ -22,7 +22,15 @@ def getNbsubnet():
 
 def getArgument(subnet):
     for i in range (3, len(sys.argv)):
-        print (sys.argv[i])
+        try:
+            tmp = int (sys.argv[i])
+            l.append(tmp)
+        except ValueError:
+            print ("Error: invalid number of client on subnet #%d" %(i - 2), file=sys.stderr)
+            exit (84)
+    if (subnet != len(l)):
+        print ("Error: invalid number of parametre", file=sys.stderr)
+        exit (84)
         
 def calcSubnet(subnet):
     print ("------------------------------------------------")
@@ -32,6 +40,7 @@ def calcSubnet(subnet):
 def initNetwork(network):
     print ("------------------------------------------------")
     print ("             Network : %s                       " % network)
+    print ("------------------------------------------------")
 
 if __name__ == '__main__':
     if (len(sys.argv) < 4):
