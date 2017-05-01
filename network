@@ -12,6 +12,35 @@ def usage():
     print("\tnetwork [network] [number of subnet] [nbIP subnet 1] ...")
     sys.exit(84)
 
+def is_network(network):
+    test = network.split('.')
+    if len (test) == 4:
+        try:
+            nb = [int(z) for z in test]
+        except ValueError:
+            return False
+        if nb[0] <= 255 and nb[1] <= 255 and nb[2] <= 255 and nb[3] <= 255:
+            return True
+        else:
+            return False
+    else:
+        return False
+
+def getNetmask():
+    test = Ni[0].split('.')
+    if (int(test[0]) < 128):
+        Ni.append("A")
+        Ni.append("255.0.0.0")
+        Ni.append("/8")
+    elif (int (test[0]) >= 128 and int(test[0]) < 192):
+        Ni.append("B")
+        Ni.append("255.255.0.0")
+        Ni.append("/16")
+    else:
+        Ni.append("C")
+        Ni.append("255.255.255.0")
+        Ni.append("/24")
+        
 def getNbsubnet():
     try:
         tmp = int (sys.argv[2])
@@ -37,18 +66,26 @@ def calcSubnet(subnet, i):
     print ("Subnet#%d %s" %(i, subnet))
     print ("------------------------------------------------")
 
-def initNetwork(network):
+def initNetwork():
     print ("################################################")
-    print ("Network : %s" % network)
+    print ("Network : %s" % Ni[0])
+    print ("Netmask : %s" % Ni[2])
+    print ("Class   : %s" % Ni[1])
+    print ("CIDR    : %s" % Ni[3])
     print ("################################################")
 
 if __name__ == '__main__':
     if (len(sys.argv) < 4):
         usage()
     l = []
-    network = sys.argv[1]
+    Ni = []
+    Ni.append(sys.argv[1])
+    if (is_network(Ni[0]) != True):
+        print ("Error : Bad network", file=sys.stderr)
+        exit (84)
     nbSubnet = getNbsubnet()
+    getNetmask()
     getArgument(nbSubnet)
-    initNetwork(network)
+    initNetwork()
     for i in range (0, len(l)):
         calcSubnet(l[i], i+ 1)
