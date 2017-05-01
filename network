@@ -2,9 +2,9 @@
 # -*- coding: latin-1 -*-                                                 
 
 try:
-    import sys
+    import sys, math
 except:
-    print ("Error: Cannot load lib 'sys'", file=sys.stderr)
+    print ("Error: Cannot load lib 'sys' or math", file=sys.stderr)
     sys.exit(84)
 
 def usage():
@@ -26,6 +26,22 @@ def is_network(network):
     else:
         return False
 
+def getMaskSub(NbHost):
+    ref = 0
+    i = 0
+
+    while (ref < NbHost):
+        ref = math.pow(2, i)
+        i += 1
+    test = Ni[2].split('.')
+    value = int(256 - math.pow(2, i))
+    for k in range (0, len(test)):
+        if (int(test[k]) != 255):
+            test[k] = value
+            break
+    tmp = str(test[0] +"." +str(test[1]) +"." +str(test[2]) + "." +str(test[3]))
+    print ("Netmask : %s" %tmp)
+    
 def getNetmask():
     test = Ni[0].split('.')
     if (int(test[0]) < 128):
@@ -55,7 +71,7 @@ def getArgument(subnet):
             tmp = int (sys.argv[i])
             l.append(tmp)
         except ValueError:
-            print ("Error: invalid number of client on subnet #%d" %(i - 2), file=sys.stderr)
+            print ("Error: invalid number of client in subnet ID#%d" %(i - 2), file=sys.stderr)
             exit (84)
     if (subnet != len(l)):
         print ("Error: invalid number of parametre", file=sys.stderr)
@@ -63,9 +79,9 @@ def getArgument(subnet):
         
 def calcSubnet(subnet, i):
     print ("------------------------------------------------")
-    print ("Subnet#%d %s" %(i, subnet))
+    print ("Subnet#%d -> %s hosts" %(i, subnet))
+    getMaskSub(subnet)
     print ("------------------------------------------------")
-
 def initNetwork():
     print ("################################################")
     print ("Network : %s" % Ni[0])
