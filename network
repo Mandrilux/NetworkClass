@@ -34,13 +34,13 @@ def getArgument(subnet):
         
 def calcSubnet(subnet, i):
     print ("------------------------------------------------")
-    print ("              Subnet#%d %s                      " %(i, subnet))
+    print ("Subnet#%d %s" %(i, subnet))
     print ("------------------------------------------------")
 
 def initNetwork(network):
-    print ("------------------------------------------------")
-    print ("             Network : %s                       " % network)
-    print ("------------------------------------------------")
+    print ("################################################")
+    print ("Network : %s" % network)
+    print ("################################################")
 
 if __name__ == '__main__':
     if (len(sys.argv) < 4):
