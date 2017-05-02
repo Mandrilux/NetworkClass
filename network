@@ -26,10 +26,20 @@ def is_network(network):
     else:
         return False
 
+def networking(limit):
+    test = Ni[0].split('.')
+    test[Ni[5]] =   int(test[Ni[5]]) + 1
+    tmp = str(test[0]) + "." + str(test[1]) + "." + str(test[2]) + "." + str(test[3])
+    print ("1 Host  : %s" %tmp)
+    test[Ni[5]] = limit - 1
+    tmp = str(test[0]) + "." + str(test[1]) + "." + str(test[2]) + "." + str(test[3])
+    print ("Last Host : %s" %tmp)
+    test[Ni[5]] = limit
+    tmp = str(test[0]) + "." + str(test[1]) + "." + str(test[2]) + "." + str(test[3])
+    print ("Broadcast : %s" %tmp)
 def getMaskSub(NbHost):
     ref = 0
     i = 0
-
     while (ref < NbHost):
         ref = math.pow(2, i)
         if (i >= 2):
@@ -43,6 +53,8 @@ def getMaskSub(NbHost):
             break
     tmp = str(test[0] +"." +str(test[1]) +"." +str(test[2]) + "." +str(test[3]))
     print ("Netmask : %s" %tmp)
+    print ("Network : %s" %Ni[0])
+    networking(int(math.pow(2, i -1) - 1))
     
 def getNetmask():
     test = Ni[0].split('.')
@@ -51,16 +63,19 @@ def getNetmask():
         Ni.append("255.0.0.0")
         Ni.append("/8")
         Ni.append(pow(2,32 - 8))
+        Ni.append(1)
     elif (int (test[0]) >= 128 and int(test[0]) < 192):
         Ni.append("B")
         Ni.append("255.255.0.0")
         Ni.append("/16")
         Ni.append(pow(2, 32 - 16))
+        Ni.append(2)
     else:
         Ni.append("C")
         Ni.append("255.255.255.0")
         Ni.append("/24")
         Ni.append(pow(2,32 - 24))
+        Ni.append(3)
         
 def getNbsubnet():
     try:
@@ -86,6 +101,7 @@ def calcSubnet(subnet, i):
     print ("Subnet#%d -> %s hosts" %(i, subnet))
     getMaskSub(subnet)
     print ("------------------------------------------------")
+    
 def initNetwork():
     print ("################################################")
     print ("Network : %s" % Ni[0])
