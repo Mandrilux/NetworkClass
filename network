@@ -34,10 +34,8 @@ def getMaskSub(NbHost):
         ref = math.pow(2, i)
         if (i >= 2):
             ref -= 2
-        print ("ref = %d" %ref)
         i += 1
     test = Ni[2].split('.')
-    print("i = %d" %i)
     value = int(256 - math.pow(2, i - 1))
     for k in range (0, len(test)):
         if (int(test[k]) != 255):
