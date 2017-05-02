@@ -32,8 +32,12 @@ def getMaskSub(NbHost):
 
     while (ref < NbHost):
         ref = math.pow(2, i)
+        if (i >= 2):
+            ref -= 2
+        print ("ref = %d" %ref)
         i += 1
     test = Ni[2].split('.')
+    print("i = %d" %i)
     value = int(256 - math.pow(2, i))
     for k in range (0, len(test)):
         if (int(test[k]) != 255):
@@ -48,14 +52,17 @@ def getNetmask():
         Ni.append("A")
         Ni.append("255.0.0.0")
         Ni.append("/8")
+        Ni.append(pow(2,32 - 8))
     elif (int (test[0]) >= 128 and int(test[0]) < 192):
         Ni.append("B")
         Ni.append("255.255.0.0")
         Ni.append("/16")
+        Ni.append(pow(2, 32 - 16))
     else:
         Ni.append("C")
         Ni.append("255.255.255.0")
         Ni.append("/24")
+        Ni.append(pow(2,32 - 24))
         
 def getNbsubnet():
     try:
@@ -72,7 +79,10 @@ def getArgument():
             l.append(tmp)
         except ValueError:
             print ("Error: invalid number of client in subnet ID#%d" %(i - 2), file=sys.stderr)
-            exit (84)        
+            exit (84)
+    if (sum(l) > Ni[4]):
+        print("Error : More client for this network")
+        exit(84)
 def calcSubnet(subnet, i):
     print ("------------------------------------------------")
     print ("Subnet#%d -> %s hosts" %(i, subnet))
@@ -84,6 +94,7 @@ def initNetwork():
     print ("Netmask : %s" % Ni[2])
     print ("Class   : %s" % Ni[1])
     print ("CIDR    : %s" % Ni[3])
+    print ("IP Avail: %s" % Ni[4])
     print ("################################################")
     print ("")
 
