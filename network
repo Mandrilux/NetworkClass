@@ -34,10 +34,10 @@ def networking(limit):
     test[Ni[5]] = test[Ni[5]] + limit - 1
     tmp = str(test[0]) + "." + str(test[1]) + "." + str(test[2]) + "." + str(test[3])
     print ("Last Host : %s" %tmp)
-    test[Ni[5]] = limit
+    test[Ni[5]] += 1
     tmp = str(test[0]) + "." + str(test[1]) + "." + str(test[2]) + "." + str(test[3])
     print ("Broadcast : %s" %tmp)
-    test[Ni[5]] = limit + 1
+    test[Ni[5]] += 1
     tmp = str(test[0]) + "." + str(test[1]) + "." + str(test[2]) + "." + str(test[3])
     print ("next network %s" %tmp)
     Ni[0] = tmp
