@@ -31,12 +31,17 @@ def networking(limit):
     test[Ni[5]] =   int(test[Ni[5]]) + 1
     tmp = str(test[0]) + "." + str(test[1]) + "." + str(test[2]) + "." + str(test[3])
     print ("1 Host  : %s" %tmp)
-    test[Ni[5]] = limit - 1
+    test[Ni[5]] = test[Ni[5]] + limit - 1
     tmp = str(test[0]) + "." + str(test[1]) + "." + str(test[2]) + "." + str(test[3])
     print ("Last Host : %s" %tmp)
     test[Ni[5]] = limit
     tmp = str(test[0]) + "." + str(test[1]) + "." + str(test[2]) + "." + str(test[3])
     print ("Broadcast : %s" %tmp)
+    test[Ni[5]] = limit + 1
+    tmp = str(test[0]) + "." + str(test[1]) + "." + str(test[2]) + "." + str(test[3])
+    print ("next network %s" %tmp)
+    Ni[0] = tmp
+    
 def getMaskSub(NbHost):
     ref = 0
     i = 0
@@ -53,7 +58,7 @@ def getMaskSub(NbHost):
             break
     tmp = str(test[0] +"." +str(test[1]) +"." +str(test[2]) + "." +str(test[3]))
     print ("Netmask : %s" %tmp)
-    print ("Network : %s" %Ni[0])
+    print ("Network : %s" % Ni[0])
     networking(int(math.pow(2, i -1) - 1))
     
 def getNetmask():
